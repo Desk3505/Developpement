@@ -1,5 +1,6 @@
 package com.example.projetfinal;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -32,6 +33,7 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        //setContentView(new MyView(R.layout.activity_game));
 
         game = new Game(4);
     }
@@ -53,10 +55,36 @@ public class GameActivity extends AppCompatActivity {
         if(event.getAction() == MotionEvent.ACTION_DOWN){
             String text = "You click at x = " + event.getX() + " and y = " + event.getY();
             Toast.makeText(this, text, Toast.LENGTH_LONG).show();
+            game.setTouchX(event.getX());
+            game.setTouchY(event.getY());
         }
         return super.onTouchEvent(event);
     }
 
+    public class MyView extends View{
+        Paint paint = null;
+
+        public MyView(Context context) {
+            super(context);
+            paint = new Paint();
+        }
+
+        @Override
+        protected void onDraw(Canvas canvas){
+            super.onDraw(canvas);
+            float x = game.getTouchX();
+            float y = game.getTouchY();
+            int rad = 20;
+            paint.setStyle(Paint.Style.FILL);
+            paint.setColor(Color.parseColor("#FF03DAC5"));
+            canvas.drawPaint(paint);
+            canvas.drawCircle(x,y,rad,paint);
+            ImageView iv = (ImageView)findViewById(R.id.imageView);
+            iv.draw(canvas);
+        }
+    }
+
+    /*
     public void imgClick(View view, MotionEvent mv) {
         float x = mv.getX();
         float y = mv.getY();
@@ -76,4 +104,5 @@ public class GameActivity extends AppCompatActivity {
 
         iv.draw(canvas);
     }
+     */
 }
