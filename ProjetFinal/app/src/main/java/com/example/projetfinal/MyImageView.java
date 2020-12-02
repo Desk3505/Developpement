@@ -9,7 +9,7 @@ import android.widget.ImageView;
 
 import static android.graphics.Color.TRANSPARENT;
 
-public class MyImageView extends ImageView {
+public class MyImageView extends androidx.appcompat.widget.AppCompatImageView {
     public MyImageView(Context context){
         super(context);
     }
