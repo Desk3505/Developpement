@@ -7,7 +7,7 @@
     <string name="DiceRes5">5</string>
     <string name="DiceRes6">6</string>
     <string name="Roll">Roll</string>
-    <string name="Start">Press Roll</string>
+    <string name="Start">Press Below</string>
     <string name="title_activity_game">GameActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
