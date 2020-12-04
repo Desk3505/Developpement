@@ -1,5 +1,6 @@
 package com.example.projetfinal;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -14,6 +15,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,8 +30,6 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        //setContentView(new MyView(R.layout.activity_game));
-        //DrawingView dv = new DrawingView(this);
 
         game = new Game(4);
         iv = new MyImageView(this);
@@ -44,7 +44,7 @@ public class GameActivity extends AppCompatActivity {
         String s = null;
         s = Integer.toString(temp);
         tv1.setText(s);
-        game.setDe(temp);
+        game.roll(temp);
 
     }
 
@@ -56,10 +56,16 @@ public class GameActivity extends AppCompatActivity {
             Toast.makeText(this, text, Toast.LENGTH_LONG).show();
             game.setTouchX(event.getX());
             game.setTouchY(event.getY());
+            iv.myX = event.getX();
+            iv.myY = event.getY();
             iv.drawC = true;
+            iv.invalidate();
+            iv.postInvalidate();
+            
         }
         iv.invalidate();
         iv.postInvalidate();
+        
         return super.onTouchEvent(event);
     }
 
