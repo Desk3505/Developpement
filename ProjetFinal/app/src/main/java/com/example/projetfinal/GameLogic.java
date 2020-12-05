@@ -3,115 +3,61 @@ package com.example.projetfinal;
 import java.util.Arrays;
 
 public class GameLogic {
-    private int playerTurn;
+
+    private PixLocation px = new PixLocation();
+
     private int numPlayer;
     private int gameTurn;
     private int myTurn;
     private int diceRes;
-    private PixLocation px = new PixLocation();
 
     protected int[] boardGreen = new int[58];
     protected int[] boardYellow = new int[58];
     protected int[] boardRed = new int[58];
     protected int[] boardBlue = new int[58];
-    protected int xc;
-    protected int yc;
-
-    /**
-     * @return
-     */
-    public int getPlayerTurn() {
-        return playerTurn;
-    }
-
-    /**
-     * @param playerTurn
-     */
-    public void setPlayerTurn(int playerTurn) {
-        this.playerTurn = playerTurn;
-    }
-
-    /**
-     * @return
-     */
-    public int getNumPlayer() {
-        return numPlayer;
-    }
-
-    /**
-     * @param numPlayer
-     */
-    public void setNumPlayer(int numPlayer) {
-        this.numPlayer = numPlayer;
-    }
-
-    /**
-     * @return
-     */
-    public int getGameTurn() {
-        return gameTurn;
-    }
-
-    /**
-     * @param gameTurn
-     */
-    public void setGameTurn(int gameTurn) {
-        this.gameTurn = gameTurn;
-    }
-
-    /**
-     * @return
-     */
-    public int getMyTurn() {
-        return myTurn;
-    }
 
     /**
      *
      */
-    public void setMyTurn() {
-        this.myTurn = this.gameTurn % this.numPlayer;
-    }
-
-    /**
-     * @return
-     */
-    public int getDiceRes() {
-        return diceRes;
-    }
-
-    /**
-     * @param diceRes
-     */
-    public void setDiceRes(int diceRes) {
-        this.diceRes = diceRes;
-    }
-
     public void initBoardGreen() {
         Arrays.fill(boardGreen, 0);
         boardGreen[0] = 4;
         px.setGreenPix();
     }
 
+    /**
+     *
+     */
     public void initBoardYellow() {
         Arrays.fill(boardYellow, 0);
         boardYellow[0] = 4;
         px.setYellowPix();
     }
 
+    /**
+     *
+     */
     public void initBoardRed() {
         Arrays.fill(boardRed, 0);
         boardRed[0] = 4;
         px.setRedPix();
     }
 
+    /**
+     *
+     */
     public void initBoardBlue() {
         Arrays.fill(boardBlue, 0);
         boardBlue[0] = 4;
         px.setBluePix();
     }
 
-    public void moveGreen() {
+    /**
+     *
+     * @param xc
+     * @param yc
+     */
+    public void moveGreen(int xc, int yc) {
         if (this.diceRes == 6) {
             if (xc > 720 && xc < 770 && yc > 80 && yc < 120) {
                 boardGreen[1]++;
@@ -209,7 +155,12 @@ public class GameLogic {
         }
     }
 
-    public void moveYellow() {
+    /**
+     *
+     * @param xc
+     * @param yc
+     */
+    public void moveYellow(int xc, int yc) {
         if (this.diceRes == 6) {
             if (xc > 70 && xc < 120 && yc > 80 && yc < 120) {
                 boardYellow[1]++;
@@ -306,7 +257,12 @@ public class GameLogic {
         }
     }
 
-    public void moveRed() {
+    /**
+     *
+     * @param xc
+     * @param yc
+     */
+    public void moveRed(int xc, int yc) {
         if (this.diceRes == 6) {
             if (xc > 720 && xc < 770 && yc > 730 && yc < 770) {
                 boardRed[1]++;
@@ -403,7 +359,12 @@ public class GameLogic {
         }
     }
 
-    public void moveBlue() {
+    /**
+     *
+     * @param xc
+     * @param yc
+     */
+    public void moveBlue(int xc, int yc) {
         if (this.diceRes == 6) {
             if (xc > 70 && xc < 120 && yc > 730 && yc < 770) {
                 boardBlue[1]++;
@@ -501,30 +462,217 @@ public class GameLogic {
     }
 
     /**
-     *
      * @param color
      * @param loc
      */
-    public void collision(char color, int loc){
+    public void collision(char color, int loc) {
+        switch (color) {
+            case 'g':
+                int gLoc = px.getGreenPix(loc);
+
+                if (numPlayer == 4) {
+                    collisionBlue(gLoc);
+                }
+                if (numPlayer >= 3) {
+                    collisionRed(gLoc);
+                }
+                collisionYellow(gLoc);
+
+                break;
+
+            case 'y':
+                int yLoc = px.getYellowPix(loc);
+                if (numPlayer == 4) {
+                    collisionBlue(yLoc);
+                }
+                if (numPlayer >= 3) {
+                    collisionRed(yLoc);
+                }
+                collisionGreen(yLoc);
+                break;
+
+            case 'r':
+                int rLoc = px.getRedPix(loc);
+                if (numPlayer != 3) {
+                    collisionBlue(rLoc);
+                }
+                collisionGreen(rLoc);
+                collisionYellow(rLoc);
+                break;
+
+            case 'b':
+                int bLoc = px.getBluePix(loc);
+                collisionGreen(bLoc);
+                collisionRed(bLoc);
+                collisionYellow(bLoc);
+                break;
+
+            default:
+                break;
+        }
 
     }
 
     /**
+     *
+     * @param pixLoc
+     */
+    public void collisionGreen(int pixLoc) {
+        for (int i = 2; i <= 51; i++) {
+            if (pixLoc == px.getGreenPix(i) && boardGreen[i] != 0) {
+                int tmp = boardGreen[i];
+                boardGreen[i] = 0;
+                boardGreen[1] += tmp;
+                int overX = px.getGreenPix(i) / 1000;
+                int overY = px.getGreenPix(i) % 1000;
+                paint(overX, overY);
+                int nextX = px.getGreenPix(i) / 1000;
+                int nextY = px.getGreenPix(i) % 1000;
+                paint('g', nextX, nextY);
+                break;
+            }
+        }
+    }
+
+    /**
+     *
+     * @param pixLoc
+     */
+    public void collisionYellow(int pixLoc) {
+        for (int i = 2; i <= 51; i++) {
+            if (pixLoc == px.getYellowPix(i) && boardYellow[i] != 0) {
+                int tmp = boardYellow[i];
+                boardYellow[i] = 0;
+                boardYellow[1] += tmp;
+                int overX = px.getYellowPix(i) / 1000;
+                int overY = px.getYellowPix(i) % 1000;
+                paint(overX, overY);
+                int nextX = px.getYellowPix(i) / 1000;
+                int nextY = px.getYellowPix(i) % 1000;
+                paint('y', nextX, nextY);
+                break;
+            }
+        }
+    }
+
+    /**
+     *
+     * @param pixLoc
+     */
+    public void collisionRed(int pixLoc) {
+        for (int i = 2; i <= 51; i++) {
+            if (pixLoc == px.getRedPix(i) && boardRed[i] != 0) {
+                int tmp = boardRed[i];
+                boardRed[i] = 0;
+                boardRed[1] += tmp;
+                int overX = px.getRedPix(i) / 1000;
+                int overY = px.getRedPix(i) % 1000;
+                paint(overX, overY);
+                int nextX = px.getRedPix(i) / 1000;
+                int nextY = px.getRedPix(i) % 1000;
+                paint('r', nextX, nextY);
+                break;
+            }
+        }
+    }
+
+    /**
+     *
+     * @param pixLoc
+     */
+    public void collisionBlue(int pixLoc) {
+        for (int i = 2; i <= 51; i++) {
+            if (pixLoc == px.getBluePix(i) && boardBlue[i] != 0) {
+                int tmp = boardBlue[i];
+                boardBlue[i] = 0;
+                boardBlue[1] += tmp;
+                int overX = px.getBluePix(i) / 1000;
+                int overY = px.getBluePix(i) % 1000;
+                paint(overX, overY);
+                int nextX = px.getBluePix(i) / 1000;
+                int nextY = px.getBluePix(i) % 1000;
+                paint('b', nextX, nextY);
+                break;
+            }
+        }
+    }
+
+    /**
      * paint sans couleur, overwrite l'ancienne case
+     *
      * @param x
      * @param y
      */
-    public void paint(int x, int y){
+    public void paint(int x, int y) {
 
     }
 
     /**
      * paint avec coleur, g=vert, y=jaune, r=rouge, b=bleu
+     *
      * @param color
      * @param x
      * @param y
      */
-    public void paint(char color, int x, int y){
+    public void paint(char color, int x, int y) {
 
     }
+
+
+    /**
+     * @return
+     */
+    public int getNumPlayer() {
+        return numPlayer;
+    }
+
+    /**
+     * @param numPlayer
+     */
+    public void setNumPlayer(int numPlayer) {
+        this.numPlayer = numPlayer;
+    }
+
+    /**
+     * @return
+     */
+    public int getGameTurn() {
+        return gameTurn;
+    }
+
+    /**
+     * @param gameTurn
+     */
+    public void setGameTurn(int gameTurn) {
+        this.gameTurn = gameTurn;
+    }
+
+    /**
+     * @return
+     */
+    public int getMyTurn() {
+        return myTurn;
+    }
+
+    /**
+     *
+     */
+    public void setMyTurn() {
+        this.myTurn = this.gameTurn % this.numPlayer;
+    }
+
+    /**
+     * @return
+     */
+    public int getDiceRes() {
+        return diceRes;
+    }
+
+    /**
+     * @param diceRes
+     */
+    public void setDiceRes(int diceRes) {
+        this.diceRes = diceRes;
+    }
+
 }

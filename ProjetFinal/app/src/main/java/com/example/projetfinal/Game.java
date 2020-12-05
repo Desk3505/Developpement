@@ -6,8 +6,11 @@ import java.util.Random;
 
 public class Game extends GameActivity {
 
+    private GameLogic gl = new GameLogic();
+
     Game(int j) {
         this.joueur = j;
+        this.loadGame();
     }
 
     private int joueur;
@@ -22,6 +25,65 @@ public class Game extends GameActivity {
     public void roll(int valDe) {
         this.de = valDe;
         this.tour++;
+        gl.setGameTurn(tour);
+        gl.setDiceRes(valDe);
+        gl.setMyTurn();
+        this.play();
+    }
+
+    /**
+     *
+     */
+    public void loadGame() {
+        gl.setNumPlayer(this.getJoueur());
+        if (this.getJoueur() == 4) {
+            gl.initBoardBlue();
+        }
+        if (this.getJoueur() >= 3) {
+            gl.initBoardRed();
+        }
+        gl.initBoardGreen();
+        gl.initBoardYellow();
+    }
+
+    /**
+     *
+     */
+    public void play() {
+        int turn = gl.getMyTurn();
+        int xc = (int) this.getTouchX();
+        int yc = (int) this.getTouchY();
+        switch (joueur) {
+            case 2:
+                if (turn == 0) {
+                    gl.moveGreen(xc, yc);
+                } else {
+                    gl.moveYellow(xc, yc);
+                }
+                break;
+            case 3:
+                if (turn == 0) {
+                    gl.moveGreen(xc, yc);
+                } else if (turn == 1) {
+                    gl.moveRed(xc, yc);
+                } else {
+                    gl.moveYellow(xc, yc);
+                }
+                break;
+            case 4:
+                if (turn == 0) {
+                    gl.moveGreen(xc, yc);
+                } else if (turn == 1) {
+                    gl.moveRed(xc, yc);
+                } else if (turn == 2) {
+                    gl.moveBlue(xc, yc);
+                } else {
+                    gl.moveYellow(xc, yc);
+                }
+                break;
+            default:
+                break;
+        }
     }
 
     /**
@@ -93,6 +155,5 @@ public class Game extends GameActivity {
     public void setTour(int tour) {
         this.tour = tour;
     }
-
 
 }

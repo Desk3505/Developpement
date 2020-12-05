@@ -39,8 +39,8 @@ public class GameActivity extends AppCompatActivity {
         int temp;
 
         Random rand = new Random();
-        temp = rand.nextInt(6)+1;
-        TextView tv1 = (TextView)findViewById(R.id.textView2);
+        temp = rand.nextInt(6) + 1;
+        TextView tv1 = (TextView) findViewById(R.id.textView2);
         String s = null;
         s = Integer.toString(temp);
         tv1.setText(s);
@@ -49,9 +49,9 @@ public class GameActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event){
+    public boolean onTouchEvent(MotionEvent event) {
 
-        if(event.getAction() == MotionEvent.ACTION_DOWN){
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
             String text = "You click at x = " + event.getX() + " and y = " + event.getY();
             Toast.makeText(this, text, Toast.LENGTH_LONG).show();
             game.setTouchX(event.getX());
@@ -61,11 +61,10 @@ public class GameActivity extends AppCompatActivity {
             iv.drawC = true;
             iv.invalidate();
             iv.postInvalidate();
-            
         }
         iv.invalidate();
         iv.postInvalidate();
-        
+
         return super.onTouchEvent(event);
     }
 
