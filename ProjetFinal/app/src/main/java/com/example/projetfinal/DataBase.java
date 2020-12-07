@@ -33,9 +33,9 @@ public class DataBase extends SQLiteOpenHelper {
     public static final String SQUARE_COLUMN_COLOR = "color";
     public static final String SQUARE_COLUMN_OCCUPATION = "occupation";
     private SQLiteDatabase dataBase;
-    private HashMap hp;
 
     public DataBase(Context context){
+
         super(context, DATABASE_NAME,null,1);
     }
 
@@ -44,7 +44,7 @@ public class DataBase extends SQLiteOpenHelper {
         db.setForeignKeyConstraintsEnabled(true);
         db.execSQL(
                 "create table Player " +
-                        "(player_id integer primary key autoincrement, name text, score integer, foreign key (color_id) references " + PLANE_TABLE_NAME + " (color_id))"
+                        "(player_id integer primary key , name text, score integer, foreign key (color_id) references " + PLANE_TABLE_NAME + " (color_id))"
         );
         db.execSQL(
                 "create table Plane " +
@@ -69,7 +69,7 @@ public class DataBase extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS Board");
         onCreate(db);
     }
-    public boolean insertPlayer (String name, Integer player_id, String score) {
+    public boolean insertPlayer (String name, Integer player_id, Integer score) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("player_id", player_id);
@@ -124,12 +124,11 @@ public class DataBase extends SQLiteOpenHelper {
 
     public Cursor getData(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from contacts where id="+id+"", null );
-        return res;
+        return db.rawQuery( "select * from Player where id="+id+"", null );
     }
 
 
-    public boolean updatePlayer (Integer player_id, Integer score) {
+    public boolean updateScore (Integer player_id, Integer score) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("score", score);
@@ -143,6 +142,10 @@ public class DataBase extends SQLiteOpenHelper {
                 "player_id = ? ",
                 new String[] { Integer.toString(player_id) });
     }
+     public Cursor getScore(Integer player_id){
+        SQLiteDatabase db = this.getReadableDatabase();
+         return db.rawQuery("select score from Player where player_id="+player_id+"",null);
+     }
 
 
 

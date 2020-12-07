@@ -1,16 +1,74 @@
 package com.example.projetfinal;
 
-import androidx.fragment.app.Fragment;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import androidx.appcompat.app.AppCompatActivity;
 
-public class Player  extends Fragment{
-    public Player(){ }
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ToggleButton;
+
+public class Player extends AppCompatActivity {
+
+    ToggleButton tb1;
+    ToggleButton tb2;
+    ToggleButton tb3;
+    ToggleButton tb4;
+    EditText player_name1;
+    EditText player_name2;
+    EditText player_name3;
+    EditText player_name4;
+    Button nextButton;
+
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState){
-        return inflater.inflate(R.layout.rules_fragment, container, false);
+    protected void onCreate(Bundle savedInstaceState) {
+        super.onCreate(savedInstaceState);
+        setContentView(R.layout.player_fragment);
+        DataBase db = new DataBase(this);
+
+        tb1 = findViewById(R.id.toggleButton1);
+        tb2 = findViewById(R.id.toggleButton2);
+        tb3 = findViewById(R.id.toggleButton3);
+        tb4 = findViewById(R.id.toggleButton4);
+
+        tb1.setOnClickListener(v -> { //lambda
+            player_name1 = findViewById(R.id.player1);
+
+            player_name1.setEnabled(tb1.isChecked());
+        });
+        tb2.setOnClickListener(v -> {
+            player_name2 = findViewById(R.id.player2);
+
+            player_name2.setEnabled(tb1.isChecked());
+        });
+        tb3.setOnClickListener(v -> {
+            player_name3 = findViewById(R.id.player3);
+
+            player_name3.setEnabled(tb1.isChecked());
+        });
+        tb4.setOnClickListener(v -> {
+            player_name4 = findViewById(R.id.player4);
+
+            player_name4.setEnabled(tb1.isChecked());
+        });
+
+        nextButton = findViewById(R.id.start_game);
+        nextButton.setOnClickListener(view -> {
+            if (tb1.isChecked()) {
+                db.insertPlayer(player_name1.getText().toString(), 1, 0);
+
+            } else if (tb2.isChecked()) {
+                db.insertPlayer(player_name2.getText().toString(), 2, 0);
+
+            } else if (tb3.isChecked()) {
+                db.insertPlayer(player_name3.getText().toString(), 3, 0);
+
+            } else if (tb4.isChecked()) {
+                db.insertPlayer(player_name4.getText().toString(), 4, 0);
+
+            }
+        });
     }
 }

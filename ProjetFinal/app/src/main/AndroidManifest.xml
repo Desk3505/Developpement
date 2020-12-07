@@ -9,6 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjetFinal">
+        <activity
+            android:name=".GameActivity"
+            android:label="@string/title_activity_game"
+            android:theme="@style/Theme.ProjetFinal.NoActionBar"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,9 +21,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".Rules" />
+        <activity android:name=".Player"/>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
     </application>
 
 </manifest>

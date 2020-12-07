@@ -20,36 +20,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         button = findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent androidsolved_intent = new Intent(getApplicationContext(),GameActivity.class);
-                startActivity(androidsolved_intent);
-            }
+        button.setOnClickListener(v -> {
+            Intent androidsolved_intent = new Intent(getApplicationContext(),Player.class);
+            startActivity(androidsolved_intent);
         });
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu, menu);
-
-        // return true so that the menu pop up is opened
-        return true;
-    }
-
-
-    public boolean onOptionItemSelected(@NonNull MenuItem item){
-        int id = item.getItemId();
-
-       switch(item.getItemId()){
-           case R.id.rules:
-               startActivity(new Intent(this,Rules.class));
-               return true;
-       }
-
-
-        return super.onOptionsItemSelected(item);
-    }
 }
