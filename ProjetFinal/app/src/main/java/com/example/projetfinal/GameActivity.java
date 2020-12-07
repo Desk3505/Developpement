@@ -25,52 +25,41 @@ import java.util.Random;
 public class GameActivity extends AppCompatActivity {
     private Game game;
     private MyImageView iv;
+    private DataBase db;
+
+    private static Context c;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        game = new Game(4);
+        int j = db.getPlayer();
+        game = new Game(j);
         iv = new MyImageView(this);
     }
 
-    /**
-     *
-     * @param view
-     * takes view and set text to dice roll
-     */
     public void send(View view) {
         int temp;
 
         Random rand = new Random();
         temp = rand.nextInt(6) + 1;
-        TextView tv1 = findViewById(R.id.textView2);
-        String s;
+        TextView tv1 = (TextView) findViewById(R.id.textView2);
+        String s = null;
         s = Integer.toString(temp);
         tv1.setText(s);
         game.roll(temp);
 
     }
 
-    /**
-     *
-     * @param event
-     * @return event
-     */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            String text = "You click at x = " + event.getX() + " and y = " + event.getY();
-            Toast.makeText(this, text, Toast.LENGTH_LONG).show();
+            //String text = "You click at x = " + event.getX() + " and y = " + event.getY();
+            //Toast.makeText(this, text, Toast.LENGTH_LONG).show();
             game.setTouchX(event.getX());
             game.setTouchY(event.getY());
-            iv.myX = event.getX();
-            iv.myY = event.getY();
-            iv.drawC = true;
-            iv.invalidate();
-            iv.postInvalidate();
         }
         iv.invalidate();
         iv.postInvalidate();
@@ -78,6 +67,17 @@ public class GameActivity extends AppCompatActivity {
         return super.onTouchEvent(event);
     }
 
+    public void winGame(String color){
+        Toast.makeText(this, color + " wins!!!", Toast.LENGTH_LONG).show();
+    }
+
+    public static Context getC() {
+        return c;
+    }
+
+    public void setC(Context c) {
+        this.c = c;
+    }
 }
 
 

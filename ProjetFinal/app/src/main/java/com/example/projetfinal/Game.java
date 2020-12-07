@@ -6,11 +6,17 @@ import java.util.Random;
 
 public class Game extends GameActivity {
 
-    private GameLogic gl = new GameLogic();
+    private GameLogic gl;
+    private MyImageView iv = new MyImageView(GameActivity.getC());
 
+    /**
+     * Constructor
+     * @param j
+     */
     Game(int j) {
         this.joueur = j;
         this.loadGame();
+        gl = new GameLogic(j);
     }
 
     private int joueur;
@@ -20,6 +26,7 @@ public class Game extends GameActivity {
     private int tour = 0;
 
     /**
+     * valeur du de
      * @param valDe
      */
     public void roll(int valDe) {
@@ -32,7 +39,7 @@ public class Game extends GameActivity {
     }
 
     /**
-     *
+     * Methode pour initializer le jeu avec le nombre de joueurs
      */
     public void loadGame() {
         gl.setNumPlayer(this.getJoueur());
@@ -47,7 +54,7 @@ public class Game extends GameActivity {
     }
 
     /**
-     *
+     * Methode pour jouer
      */
     public void play() {
         int turn = gl.getMyTurn();
@@ -84,6 +91,37 @@ public class Game extends GameActivity {
             default:
                 break;
         }
+    }
+
+    /**
+     * paint sans couleur, overwrite l'ancienne case
+     *
+     * @param x
+     * @param y
+     */
+    public void paint(int x, int y) {
+        iv.myX = (float)x;
+        iv.myY = (float)y;
+        iv.cirColor = 'w';
+        iv.drawC = true;
+        iv.invalidate();
+        iv.postInvalidate();
+    }
+
+    /**
+     * paint avec coleur, g=vert, y=jaune, r=rouge, b=bleu
+     *
+     * @param color
+     * @param x
+     * @param y
+     */
+    public void paint(char color, int x, int y) {
+        iv.myX = (float)x;
+        iv.myY = (float)y;
+        iv.cirColor = color;
+        iv.drawC = true;
+        iv.invalidate();
+        iv.postInvalidate();
     }
 
     /**

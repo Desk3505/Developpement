@@ -17,7 +17,7 @@ public class PixLocation {
     }
 
     /**
-     *
+     * valeurs de chaque pixel des pieces vert
      */
     public void setGreenPix(){
         this.greenPix[1] = 663080;
@@ -89,7 +89,7 @@ public class PixLocation {
     }
 
     /**
-     *
+     * valeurs de chaque pixel des pieces jaune
      */
     public void setYellowPix() {
         this.yellowPix[1] = 79287;
@@ -161,7 +161,7 @@ public class PixLocation {
     }
 
     /**
-     *
+     * valeurs de chaque pixel des pieces rouge
      */
     public void setRedPix(){
         this.redPix[1] = 869666;
@@ -233,7 +233,7 @@ public class PixLocation {
     }
 
     /**
-     *
+     * valeurs de chaque pixel des pieces blue
      */
     public void setBluePix(){
         this.bluePix[1] = 285868;

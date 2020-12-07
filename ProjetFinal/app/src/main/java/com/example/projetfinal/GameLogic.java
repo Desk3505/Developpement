@@ -1,10 +1,14 @@
 package com.example.projetfinal;
 
+import android.database.Cursor;
+import android.widget.Toast;
+
 import java.util.Arrays;
 
-public class GameLogic {
+public class GameLogic extends Game {
 
     private PixLocation px = new PixLocation();
+    private DataBase db;
 
     private int numPlayer;
     private int gameTurn;
@@ -17,7 +21,15 @@ public class GameLogic {
     protected int[] boardBlue = new int[58];
 
     /**
-     *
+     * Constructor pour extends Game
+     * @param j
+     */
+    GameLogic(int j) {
+        super(j);
+    }
+
+    /**
+     * initialise array pour Vert
      */
     public void initBoardGreen() {
         Arrays.fill(boardGreen, 0);
@@ -26,7 +38,7 @@ public class GameLogic {
     }
 
     /**
-     *
+     * initialise array pour Jaune
      */
     public void initBoardYellow() {
         Arrays.fill(boardYellow, 0);
@@ -35,7 +47,7 @@ public class GameLogic {
     }
 
     /**
-     *
+     * initialise array pour Rouge
      */
     public void initBoardRed() {
         Arrays.fill(boardRed, 0);
@@ -44,7 +56,7 @@ public class GameLogic {
     }
 
     /**
-     *
+     * initialise array pour Blue
      */
     public void initBoardBlue() {
         Arrays.fill(boardBlue, 0);
@@ -53,11 +65,11 @@ public class GameLogic {
     }
 
     /**
-     *
+     * Methode pour le deplacement des pieces vert
      * @param xc
      * @param yc
      */
-    public void moveGreen(int xc, int yc) {
+    public int moveGreen(int xc, int yc) {
         if (this.diceRes == 6) {
             if (xc > 720 && xc < 770 && yc > 80 && yc < 120) {
                 boardGreen[1]++;
@@ -117,6 +129,8 @@ public class GameLogic {
                             boardGreen[i]--;
                             paint(x, y);
                             //check win
+                            db.updateScore(1,boardGreen[57]);
+                            winGame('g');
                             break;
                         } else {
                             int j = i + diceRes;
@@ -153,10 +167,14 @@ public class GameLogic {
                 }
             }
         }
+
+
+
+        return 0;
     }
 
     /**
-     *
+     * Methode pour le deplacement des pieces jaune
      * @param xc
      * @param yc
      */
@@ -219,6 +237,8 @@ public class GameLogic {
                             boardYellow[i]--;
                             paint(x, y);
                             //check win
+                            db.updateScore(2,boardYellow[57]);
+                            winGame('y');
                             break;
                         } else {
                             int j = i + diceRes;
@@ -258,7 +278,7 @@ public class GameLogic {
     }
 
     /**
-     *
+     * Methode pour le deplacement des pieces rouge
      * @param xc
      * @param yc
      */
@@ -321,6 +341,9 @@ public class GameLogic {
                             boardRed[i]--;
                             paint(x, y);
                             //check win
+                            //check win
+                            db.updateScore(3,boardRed[57]);
+                            winGame('r');
                             break;
                         } else {
                             int j = i + diceRes;
@@ -360,7 +383,7 @@ public class GameLogic {
     }
 
     /**
-     *
+     * Methode pour le deplacement des pieces blue
      * @param xc
      * @param yc
      */
@@ -423,6 +446,8 @@ public class GameLogic {
                             boardBlue[i]--;
                             paint(x, y);
                             //check win
+                            db.updateScore(4,boardBlue[57]);
+                            winGame('b');
                             break;
                         } else {
                             int j = i + diceRes;
@@ -462,6 +487,7 @@ public class GameLogic {
     }
 
     /**
+     * Gestion des collisions
      * @param color
      * @param loc
      */
@@ -514,7 +540,7 @@ public class GameLogic {
     }
 
     /**
-     *
+     * collision pour vert
      * @param pixLoc
      */
     public void collisionGreen(int pixLoc) {
@@ -535,7 +561,7 @@ public class GameLogic {
     }
 
     /**
-     *
+     * collision pour jaune
      * @param pixLoc
      */
     public void collisionYellow(int pixLoc) {
@@ -556,7 +582,7 @@ public class GameLogic {
     }
 
     /**
-     *
+     * collision pour rouge
      * @param pixLoc
      */
     public void collisionRed(int pixLoc) {
@@ -577,7 +603,7 @@ public class GameLogic {
     }
 
     /**
-     *
+     * collision pour blue
      * @param pixLoc
      */
     public void collisionBlue(int pixLoc) {
@@ -598,26 +624,50 @@ public class GameLogic {
     }
 
     /**
-     * paint sans couleur, overwrite l'ancienne case
-     *
-     * @param x
-     * @param y
-     */
-    public void paint(int x, int y) {
-
-    }
-
-    /**
-     * paint avec coleur, g=vert, y=jaune, r=rouge, b=bleu
-     *
+     * Methode pour verfier le gagnant
      * @param color
-     * @param x
-     * @param y
      */
-    public void paint(char color, int x, int y) {
+    public void winGame(char color) {
 
+        GameActivity ga = new GameActivity();
+
+        switch (color) {
+            case 'g':
+                Cursor gc = db.getScore(1);
+                gc.moveToFirst();
+                int g = gc.getInt(0);
+                if (g == 4) {
+                    ga.winGame("Green");
+                }
+                break;
+            case 'y':
+                Cursor yc = db.getScore(2);
+                yc.moveToFirst();
+                int y = yc.getInt(0);
+                if (y == 4) {
+                    ga.winGame("Yellow");
+                }
+                break;
+            case 'r':
+                Cursor rc = db.getScore(3);
+                rc.moveToFirst();
+                int r = rc.getInt(0);
+                if (r == 4) {
+                    ga.winGame("Red");
+                }
+                break;
+            case 'b':
+                Cursor bc = db.getScore(4);
+                bc.moveToFirst();
+                int b = bc.getInt(0);
+                if (b == 4) {
+                    ga.winGame("Blue");
+                }
+                break;
+            default:
+                break;
+        }
     }
-
 
     /**
      * @return
