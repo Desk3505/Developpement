@@ -35,6 +35,7 @@ public class DataBase extends SQLiteOpenHelper {
 
     /**
      * @param context
+     * constructor
      */
     public DataBase(Context context) {
 
@@ -44,6 +45,7 @@ public class DataBase extends SQLiteOpenHelper {
 
     /**
      * @param db
+     * create ddb
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -84,7 +86,7 @@ public class DataBase extends SQLiteOpenHelper {
      * @param name
      * @param player_id
      * @param score
-     * @return
+     * @return true
      */
     public boolean insertPlayer(String name, Integer player_id, Integer score) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -98,7 +100,7 @@ public class DataBase extends SQLiteOpenHelper {
 
     /**
      * @param color_id
-     * @return
+     * @return true
      */
     private boolean insertPlane(String color_id) {
         SQLiteDatabase db = this.getWritableDatabase();
