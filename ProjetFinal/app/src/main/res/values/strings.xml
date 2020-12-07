@@ -21,4 +21,31 @@
     <string name="player">Joueurs</string>
 
 
+    <string name="Gameplay">Gameplay</string>
+    <string name="r1">1.Each player takes turns rolling the die.</string>
+    <string name="r2">2.Once rolled, the player can choose which of his/her planes to move.
+        Only planes which have left the hangar can be moved.</string>
+    <string name="r3">3.The selected plane will move the number of steps shown on the rolled die.</string>
+    <string name="r4">4.In order to move a plane out of the hangar, a 6 must be rolled.</string>
+    <string name="r5">5.If a player rolls a 6, he/she gets another turn.</string>
+    <string name="r6">6.If a plane lands on another plane of a different color,
+        that bottom plane is returned to its hangar.</string>
+    <string name="r7">7.If a plane lands on a space that is the same color as the plane,
+        that plane can jump ahead four spaces.</string>
+    <string name="r8">8.The game board contains 4 shortcuts, one for each player.
+        If a plane lands on the space where the shortcut begins, that plane can fly across the board bypassing numerous spaces.</string>
+    <string name="r9">9.When a plane lands on the last space at the center of the game board,
+        that plane is removed from the game.
+        Note that a plane must actually land on that last space. If it exceeds the last space,
+        it will start moving backwards.</string>
+    <string name="r10">10.Once all of a player\'s planes are removed from the game, he/she wins.</string>
+
+
+    <!-- ON/OFF NUMBER OF PLAYER -->
+    <string name="player1">Player 1</string>
+    <string name="player2">Player 2</string>
+    <string name="player3">Player 3</string>
+    <string name="player4">Player 4</string>
+
+    <string name="player_hint">Player name</string>
 </resources>

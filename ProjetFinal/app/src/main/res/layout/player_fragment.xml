@@ -1,16 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:background="#000000">
 
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="187dp"
-        tools:layout_editor_absoluteY="202dp"
-        tools:ignore="MissingConstraints" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        style="@style/BackGroundImageView"
+        android:layout_width="match_parent"
+        android:layout_height="732dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="0dp"
+        tools:ignore="ContentDescription" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="358dp"
+        tools:layout_editor_absoluteY="343dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="88dp"
+            android:orientation="horizontal">
+
+            <ToggleButton
+                android:id="@+id/toggleButton1"
+                android:layout_width="108dp"
+                android:layout_height="wrap_content"
+                android:textOff="@string/player1"
+                tools:text="@string/player1" />
+
+            <EditText
+                android:id="@+id/player1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:autofillHints="name"
+                android:ems="10"
+                android:enabled="false"
+                android:hint="@string/player_hint"
+                android:inputType="none"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"
+                android:shadowColor="#000000"
+                android:shadowDx="1.5"
+                android:shadowDy="1.3"
+                android:shadowRadius="3"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="88dp"
+            android:orientation="horizontal">
+
+            <ToggleButton
+                android:id="@+id/toggleButton2"
+                android:layout_width="108dp"
+                android:layout_height="wrap_content"
+                android:textOff="@string/player2" />
+
+            <EditText
+                android:id="@+id/player2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:autofillHints="name"
+                android:ems="10"
+                android:enabled="false"
+                android:hint="@string/player_hint"
+                android:inputType="none"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"
+                android:shadowColor="#000000"
+                android:shadowDx="1.5"
+                android:shadowDy="1.3"
+                android:shadowRadius="3" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="88dp"
+            android:orientation="horizontal">
+
+            <ToggleButton
+                android:id="@+id/toggleButton3"
+                android:layout_width="108dp"
+                android:layout_height="wrap_content"
+                android:textOff="@string/player3" />
+
+            <EditText
+                android:id="@+id/player3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:autofillHints="name"
+                android:ems="10"
+                android:enabled="false"
+                android:hint="@string/player_hint"
+                android:inputType="none"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"
+                android:shadowColor="#000000"
+                android:shadowDx="1.5"
+                android:shadowDy="1.3"
+                android:shadowRadius="3"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="88dp"
+            android:orientation="horizontal">
+
+            <ToggleButton
+                android:id="@+id/toggleButton4"
+                android:layout_width="108dp"
+                android:layout_height="wrap_content"
+                android:textOff="@string/player4" />
+
+            <EditText
+                android:id="@+id/player4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:autofillHints="name"
+                android:ems="10"
+                android:enabled="false"
+                android:hint="@string/player_hint"
+                android:inputType="none"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"
+                android:shadowColor="#000000"
+                android:shadowDx="1.5"
+                android:shadowDy="1.3"
+                android:shadowRadius="3"/>
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="273dp" />
+
+        <Button
+            android:id="@+id/start_game"
+            android:layout_width="match_parent"
+            android:layout_height="62dp"
+            android:text="@string/start_game" />
+    </LinearLayout>
+</RelativeLayout>

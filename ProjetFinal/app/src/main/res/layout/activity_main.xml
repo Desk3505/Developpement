@@ -36,19 +36,20 @@
 
         </TextView>
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar2"
+        <include
+            layout="@layout/rules_fragment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme" />
+            android:layout_height="408dp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="151dp" />
 
         <Button
             android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="77dp"
-            android:text="@string/start_game" />
+            android:text="@string/next" />
 
     </LinearLayout>
 
