@@ -21,7 +21,6 @@ public class Player extends AppCompatActivity {
     EditText player_name4;
     Button nextButton;
 
-
     @Override
     protected void onCreate(Bundle savedInstaceState) {
         super.onCreate(savedInstaceState);
@@ -58,17 +57,16 @@ public class Player extends AppCompatActivity {
         nextButton.setOnClickListener(view -> {
             if (tb1.isChecked()) {
                 db.insertPlayer(player_name1.getText().toString(), 1, 0);
-
             } else if (tb2.isChecked()) {
                 db.insertPlayer(player_name2.getText().toString(), 2, 0);
-
             } else if (tb3.isChecked()) {
                 db.insertPlayer(player_name3.getText().toString(), 3, 0);
-
             } else if (tb4.isChecked()) {
                 db.insertPlayer(player_name4.getText().toString(), 4, 0);
-
             }
+
+            Intent androidsolved_intent = new Intent(getApplicationContext(), GameActivity.class);
+            startActivity(androidsolved_intent);
         });
     }
 }
