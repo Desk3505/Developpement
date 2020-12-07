@@ -1,4 +1,5 @@
 <resources>
+    <!-- GAME ACTIVITY STRNGS -->
     <string name="app_name">ProjetFinal</string>
     <string name="DiceRes1">1</string>
     <string name="DiceRes2">2</string>
@@ -10,17 +11,14 @@
     <string name="Start">Press Below</string>
     <string name="title_activity_game">GameActivity</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
-    <string name="previous">Previous</string>
     <string name="title">AeroPlane Chess</string>
     <string name="start_game">Start Game</string>
     <!-- Strings used for menu -->
     <string name="rules">Règlements</string>
     <string name="player">Joueurs</string>
 
-
+    <!-- ALL THE RULES -->
     <string name="Gameplay">Gameplay</string>
     <string name="r1">1.Each player takes turns rolling the die.</string>
     <string name="r2">2.Once rolled, the player can choose which of his/her planes to move.

@@ -32,6 +32,7 @@ public class Player extends AppCompatActivity {
         tb3 = findViewById(R.id.toggleButton3);
         tb4 = findViewById(R.id.toggleButton4);
 
+        // enable/disable editext based on toggle state
         tb1.setOnClickListener(v -> { //lambda
             player_name1 = findViewById(R.id.player1);
 
@@ -53,6 +54,7 @@ public class Player extends AppCompatActivity {
             player_name4.setEnabled(tb1.isChecked());
         });
 
+        //button to go on the main game, inserts player if toggle is checked
         nextButton = findViewById(R.id.start_game);
         nextButton.setOnClickListener(view -> {
             if (tb1.isChecked()) {

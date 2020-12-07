@@ -1,5 +1,9 @@
 package com.example.projetfinal;
 
+/*
+Color location on the screen
+ */
+
 public class PixLocation {
 
     private final int[] greenPix = new int[58];
@@ -17,7 +21,7 @@ public class PixLocation {
     }
 
     /**
-     *
+     *sets green on screen
      */
     public void setGreenPix(){
         this.greenPix[1] = 663080;
@@ -89,7 +93,7 @@ public class PixLocation {
     }
 
     /**
-     *
+     * set yellow on screen
      */
     public void setYellowPix() {
         this.yellowPix[1] = 79287;
@@ -161,7 +165,7 @@ public class PixLocation {
     }
 
     /**
-     *
+     *set reds on screen
      */
     public void setRedPix(){
         this.redPix[1] = 869666;
@@ -233,7 +237,7 @@ public class PixLocation {
     }
 
     /**
-     *
+     *sets blue on screen
      */
     public void setBluePix(){
         this.bluePix[1] = 285868;

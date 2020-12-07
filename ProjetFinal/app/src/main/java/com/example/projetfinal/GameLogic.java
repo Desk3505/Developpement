@@ -2,6 +2,10 @@ package com.example.projetfinal;
 
 import java.util.Arrays;
 
+/*
+    Most of the game logic is found here
+ */
+
 public class GameLogic {
 
     private PixLocation px = new PixLocation();
@@ -17,7 +21,7 @@ public class GameLogic {
     protected int[] boardBlue = new int[58];
 
     /**
-     *
+     *initiate the green squares
      */
     public void initBoardGreen() {
         Arrays.fill(boardGreen, 0);
@@ -26,7 +30,7 @@ public class GameLogic {
     }
 
     /**
-     *
+     *initiate the yellow squares
      */
     public void initBoardYellow() {
         Arrays.fill(boardYellow, 0);
@@ -35,7 +39,7 @@ public class GameLogic {
     }
 
     /**
-     *
+     *initiate the red squares
      */
     public void initBoardRed() {
         Arrays.fill(boardRed, 0);
@@ -44,7 +48,7 @@ public class GameLogic {
     }
 
     /**
-     *
+     *initiate the blue squares
      */
     public void initBoardBlue() {
         Arrays.fill(boardBlue, 0);
@@ -56,6 +60,7 @@ public class GameLogic {
      *
      * @param xc
      * @param yc
+     * Green pieces movements
      */
     public void moveGreen(int xc, int yc) {
         if (this.diceRes == 6) {
@@ -159,6 +164,7 @@ public class GameLogic {
      *
      * @param xc
      * @param yc
+     * yellow pieces movement method
      */
     public void moveYellow(int xc, int yc) {
         if (this.diceRes == 6) {
@@ -261,6 +267,7 @@ public class GameLogic {
      *
      * @param xc
      * @param yc
+     * red pieces movement method
      */
     public void moveRed(int xc, int yc) {
         if (this.diceRes == 6) {
@@ -363,6 +370,7 @@ public class GameLogic {
      *
      * @param xc
      * @param yc
+     * blue pieces movement method
      */
     public void moveBlue(int xc, int yc) {
         if (this.diceRes == 6) {
@@ -464,6 +472,7 @@ public class GameLogic {
     /**
      * @param color
      * @param loc
+     * called when a player lands on a square occupied by an other player
      */
     public void collision(char color, int loc) {
         switch (color) {

@@ -1,8 +1,11 @@
 package com.example.projetfinal;
 
-import android.widget.TextView;
-
-import java.util.Random;
+/*
+General game class:
+    roll the dice;
+    load the game;
+    and play
+ */
 
 public class Game extends GameActivity {
 
@@ -21,6 +24,7 @@ public class Game extends GameActivity {
 
     /**
      * @param valDe
+     * rolls the dice
      */
     public void roll(int valDe) {
         this.de = valDe;
@@ -32,7 +36,7 @@ public class Game extends GameActivity {
     }
 
     /**
-     *
+     *loads the game for the first time
      */
     public void loadGame() {
         gl.setNumPlayer(this.getJoueur());
@@ -47,7 +51,7 @@ public class Game extends GameActivity {
     }
 
     /**
-     *
+     *games turn and animation
      */
     public void play() {
         int turn = gl.getMyTurn();

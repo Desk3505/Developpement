@@ -13,6 +13,16 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/*
+    DATABASE
+    creates, update, insert and delete :
+        player table ;
+        planes table;
+        square table;
+        board table
+
+ */
+
 public class DataBase extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "AerochessDB.db";
@@ -45,7 +55,7 @@ public class DataBase extends SQLiteOpenHelper {
 
     /**
      * @param db
-     * create ddb
+     * create db
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -72,6 +82,7 @@ public class DataBase extends SQLiteOpenHelper {
      * @param db
      * @param i
      * @param i1
+     * called for changes on database
      */
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
@@ -86,6 +97,7 @@ public class DataBase extends SQLiteOpenHelper {
      * @param name
      * @param player_id
      * @param score
+     * called for new players
      * @return true
      */
     public boolean insertPlayer(String name, Integer player_id, Integer score) {
@@ -100,6 +112,7 @@ public class DataBase extends SQLiteOpenHelper {
 
     /**
      * @param color_id
+     * called for new set of planes
      * @return true
      */
     private boolean insertPlane(String color_id) {
@@ -113,6 +126,7 @@ public class DataBase extends SQLiteOpenHelper {
     /**
      * @param name
      * @param player_id
+     * update a player by id
      * @return
      */
     public boolean updatePlayer(String name, Integer player_id) {
@@ -127,6 +141,7 @@ public class DataBase extends SQLiteOpenHelper {
      * @param square_id
      * @param color
      * @param occupation
+     * insert square of the board into db
      * @return
      */
     private boolean insertSquare(Integer square_id, Integer color, boolean occupation) {
@@ -169,6 +184,7 @@ public class DataBase extends SQLiteOpenHelper {
 
     /**
      * @param id
+     * get a plyer information from id
      * @return
      */
     public Cursor getData(Integer id) {
@@ -179,6 +195,7 @@ public class DataBase extends SQLiteOpenHelper {
     /**
      * @param player_id
      * @param score
+     * update a player's score
      * @return
      */
     public boolean updateScore(Integer player_id, Integer score) {
@@ -191,6 +208,7 @@ public class DataBase extends SQLiteOpenHelper {
 
     /**
      * @param player_id
+     * deletes a plyer from the database
      * @return
      */
     public Integer deletePlayer(Integer player_id) {
