@@ -149,7 +149,7 @@ public class DataBase extends SQLiteOpenHelper {
         return db.rawQuery("select score from Player where player_id=" + player_id + "", null);
     }
 
-    public Integer getPlayer(Integer numPlayer) {
+    public Integer getPlayer() {
         SQLiteDatabase db = this.getReadableDatabase();
         long temp = DatabaseUtils.queryNumEntries(db, "Player");
         int i = (int) temp;
