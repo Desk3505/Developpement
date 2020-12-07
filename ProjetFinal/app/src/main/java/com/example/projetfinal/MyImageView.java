@@ -18,6 +18,11 @@ public class MyImageView extends androidx.appcompat.widget.AppCompatImageView {
     public float myY;
     public boolean drawC = false;
 
+    /**
+     *
+     * @param canvas
+     * takes and draw on the canvas
+     */
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);

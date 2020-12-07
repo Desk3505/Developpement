@@ -35,19 +35,29 @@ public class GameActivity extends AppCompatActivity {
         iv = new MyImageView(this);
     }
 
+    /**
+     *
+     * @param view
+     * takes view and set text to dice roll
+     */
     public void send(View view) {
         int temp;
 
         Random rand = new Random();
         temp = rand.nextInt(6) + 1;
-        TextView tv1 = (TextView) findViewById(R.id.textView2);
-        String s = null;
+        TextView tv1 = findViewById(R.id.textView2);
+        String s;
         s = Integer.toString(temp);
         tv1.setText(s);
         game.roll(temp);
 
     }
 
+    /**
+     *
+     * @param event
+     * @return event
+     */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
