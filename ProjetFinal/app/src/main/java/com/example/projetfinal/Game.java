@@ -4,7 +4,7 @@ package com.example.projetfinal;
 General game class:
     roll the dice;
     load the game;
-    and play
+
  */
 
 public class Game extends GameActivity {
