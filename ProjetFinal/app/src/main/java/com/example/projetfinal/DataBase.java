@@ -37,19 +37,18 @@ public class DataBase extends SQLiteOpenHelper {
     public DataBase(Context context) {
 
         super(context, DATABASE_NAME, null, 1);
+        context.deleteDatabase(DATABASE_NAME);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.setForeignKeyConstraintsEnabled(true);
-
         db.execSQL(
                 "create table Player " +
-                        "(player_id integer primary key , name text, score integer, foreign key (color_id) references " + PLANE_TABLE_NAME + " (color_id))"
+                        "(player_id integer primary key , name text, score integer)"
         );
         db.execSQL(
                 "create table Plane " +
-                        "(color_id String primary key, foreign key (square_id) references " + SQUARE_TABLE_NAME + " (square_id))"
+                        "(color_id String primary key)"
         );
         db.execSQL(
                 "create table Square " +
@@ -57,7 +56,7 @@ public class DataBase extends SQLiteOpenHelper {
         );
         db.execSQL(
                 "create table Board " +
-                        "(board_id integer primary key, foreign key (player_id) references " + PLAYER_TABLE_NAME + " (player_id), foreign key (square_id) references " + SQUARE_TABLE_NAME + "(square_id))"
+                        "(board_id integer primary key)"
         );
 
     }
@@ -86,6 +85,14 @@ public class DataBase extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put("color_id", color_id);
         db.insert("Plane", null, contentValues);
+        return true;
+    }
+
+    public boolean updatePlayer(String name,Integer player_id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("name", name);
+        db.update("Player", contentValues, "player_id = ? ", new String[]{Integer.toString(player_id)});
         return true;
     }
 
@@ -152,18 +159,7 @@ public class DataBase extends SQLiteOpenHelper {
     public Integer getPlayer() {
         SQLiteDatabase db = this.getReadableDatabase();
         long temp = DatabaseUtils.queryNumEntries(db, "Player");
-        int i = (int) temp;
-        return i;
+        return (int) temp;
     }
 
-
-    /*public SQLiteDatabase openDataBase(DataBase db) {
-        if(db.isOpen())
-        {
-            dataBase.execSQL("PRAGMA foreign_keys=ON;");
-            return dataBase;
-        }
-        dataBase = db.getWritableDatabase();
-        dataBase.execSQL("PRAGMA foreign_keys=ON;");
-        return dataBase; }*/
 }
