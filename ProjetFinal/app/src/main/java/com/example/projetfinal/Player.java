@@ -41,17 +41,17 @@ public class Player extends AppCompatActivity {
         tb2.setOnClickListener(v -> {
             player_name2 = findViewById(R.id.player2);
 
-            player_name2.setEnabled(tb1.isChecked());
+            player_name2.setEnabled(tb2.isChecked());
         });
         tb3.setOnClickListener(v -> {
             player_name3 = findViewById(R.id.player3);
 
-            player_name3.setEnabled(tb1.isChecked());
+            player_name3.setEnabled(tb3.isChecked());
         });
         tb4.setOnClickListener(v -> {
             player_name4 = findViewById(R.id.player4);
 
-            player_name4.setEnabled(tb1.isChecked());
+            player_name4.setEnabled(tb4.isChecked());
         });
 
         //button to go on the main game, inserts player if toggle is checked
